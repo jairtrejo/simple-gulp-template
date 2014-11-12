@@ -1,0 +1,21 @@
+{
+  "name": "simple-gulp-template",
+  "version": "1.0.0",
+  "authors": [
+    "Jair Trejo <jair@jairtrejo.mx>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "font-awesome": "~4.2.0",
+    "bootstrap": "~3.3.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/fonts/**", "dist/js/bootstrap.min.js"
+      ]
+    }
+  }
+}
