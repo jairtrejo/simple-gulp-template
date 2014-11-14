@@ -92,7 +92,9 @@ gulp.task("browser-sync", function() {
     });
 });
 
-gulp.task("default", ["bower", "html", "scripts", "css", "less", "browser-sync"], function(){
+gulp.task("build", ["bower", "html", "scripts", "css", "less"]);
+
+gulp.task("default", ["build", "browser-sync"], function(){
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
     gulp.watch(config.paths.javascript.src, ["scripts", browserSync.reload]);
     gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
