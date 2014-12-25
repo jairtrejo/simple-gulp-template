@@ -72,7 +72,7 @@ gulp.task("css", function(){
     return gulp.src(config.paths.css.src)
         .pipe(sourcemaps.init())
         .pipe(cssmin())
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(config.paths.css.dest))
         .pipe(browserSync.reload({stream: true}));
 });
@@ -101,7 +101,7 @@ gulp.task("less", function(){
             html: glob.sync(config.paths.html.src),
         }))
         .pipe(concat("main.min.css"))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(config.paths.css.dest))
         .pipe(filter("**/*.css"))
         .pipe(browserSync.reload({stream: true}));
