@@ -3,18 +3,20 @@ var gulp           = require("gulp"),
     concat         = require("gulp-concat"),
     uglify         = require("gulp-uglify"),
     cssmin         = require("gulp-cssmin"),
+    uncss          = require("gulp-uncss"),
     imagemin       = require("gulp-imagemin"),
     sourcemaps     = require("gulp-sourcemaps"),
     mainBowerFiles = require("main-bower-files"),
     inject         = require("gulp-inject"),
     less           = require("gulp-less"),
     filter         = require("gulp-filter"),
+    glob           = require("glob"),
     browserSync    = require("browser-sync");
 
 var config = {
     paths: {
         html: {
-            src:  ["src/**/*.html"],
+            src:  "src/**/*.html",
             dest: "build"
         },
         javascript: {
@@ -90,6 +92,9 @@ gulp.task("less", function(){
         .pipe(sourcemaps.init())
         .pipe(less({
             paths: ["bower_components/bootstrap/less"]
+        }))
+        .pipe(uncss({
+            html: glob.sync(config.paths.html.src),
         }))
         .pipe(concat("main.min.css"))
         .pipe(sourcemaps.write())
