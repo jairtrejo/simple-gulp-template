@@ -38,6 +38,10 @@ var config = {
         bower: {
             src: "bower_components",
             dest: "build/lib"
+        },
+        verbatim: {
+            src: ["src/manifest.json", "src/favicon.png"],
+            dest: "build"
         }
     }
 };
@@ -103,6 +107,11 @@ gulp.task("less", function(){
         .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task("verbatim", function(){
+    gulp.src(config.paths.verbatim.src)
+        .pipe(gulp.dest(config.paths.verbatim.dest));
+});
+
 gulp.task("browser-sync", function() {
     browserSync({
         server: {
@@ -111,13 +120,14 @@ gulp.task("browser-sync", function() {
     });
 });
 
-gulp.task("build", ["bower", "html", "scripts", "css", "less", "images"]);
+gulp.task("build", ["bower", "html", "scripts", "css", "less", "images", "verbatim"]);
 
 gulp.task("default", ["build", "browser-sync"], function(){
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
     gulp.watch(config.paths.javascript.src, ["scripts", browserSync.reload]);
     gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
     gulp.watch(config.paths.images.src, ["images", browserSync.reload]);
+    gulp.watch(config.paths.verbatim.src, ["verbatim", browserSync.reload]);
 
     gulp.watch(config.paths.css.src, ["css"]);
     gulp.watch(config.paths.less.src, ["less"]);
